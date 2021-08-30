@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A template for Wiley article submissions.
+% Developed by Overleaf. 
+%
+% Please note that whilst this template provides a 
+% preview of the typeset manuscript for submission, it 
+% will not necessarily be the final publication layout.
+%
+% Usage notes:
+% The "blind" option will make anonymous all author, affiliation, correspondence and funding information.
+% Use "num-refs" option for numerical citation and references style.
+% Use "alpha-refs" option for author-year citation and references style.
+
+\documentclass[num-refs,twocolumn]{layout}
+% \documentclass[blind,alpha-refs]{wiley-article}
+
+% Add additional packages here if required
+\usepackage{siunitx}
+\usepackage{acronym}
+\usepackage{epsfig}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\sisetup{
+  round-mode          = places, % Rounds numbers
+  round-precision     = 1, % to 2 places
+}
+
+% Update article type if known
+\papertype{Original Article}
+% Include section in journal if known, otherwise delete
+\paperfield{Journal Section}
+
+\title{A digital-based design methodology for the optimization of high-performance multi-material structures}
+
+% List abbreviations here, if any. Please note that it is preferred that abbreviations be defined at the first instance they appear in the text, rather than creating an abbreviations list.
+\abbrevs{}
+
+% Include full author names and degrees, when required by the journal.
+% Use the \authfn to add symbols for additional footnotes and present addresses, if any. Usually start with 1 for notes about author contributions; then continuing with 2 etc if any author has a different present address.
+\author[1]{W. Zschiebsch}%\authfn{1}
+\author[2]{A. Filippatos}
+\author[1]{R. Böhm}
+
+%\contrib[\authfn{1}]{Equally contributing authors.}
+% Include full affiliation details for all authors
+\affil[1]{Leipzig University of Applied Sciences, Faculty of Engineering, Germany}
+\affil[2]{Dresden Center for Intelligent Materials, Germany}
+\corraddress{Willi Zschiebsch, Leipzig University of Applied Sciences, Faculty of Engineering, Germany}
+\corremail{willi.zschiebsch@gmail.com}%????????????????
+%\fundinginfo{Funder One, Funder One Department, Grant/Award Number: 123456, 123457 and 123458; Funder Two, Funder Two Department, Grant/Award Number: 123459}%DELETE ????????????????
+% Include the name of the author that should appear in the running header
+\runningauthor{Zschiebsch et al.}%????????????????
+
+\begin{document}
+
+\acrodef{fdm}[FDM]{finite difference method}
+\acrodef{fe}[FE]{finite element}
+\acrodef{fea}[FEA]{finite element analysis}
+\acrodef{fem}[FEM]{finite element method}
+\acrodef{nsa}[NSA]{normal stress averaging}
+\acrodef{pia}[PIA]{principle of independent action}
+
+\begin{frontmatter}
+\maketitle
+
+\begin{abstract}
+% Vorschlag Felix:
+To determine the probability of failure for the brittle materials, the 'principle of independent action' (pia) method can be used with stresses calculated by Finite Element (FE) simulations. In this work different methods for implementing the pia method into existing fem programs are evaluated in terms of computational error and effort. It could be shown, that the commonly used normal stress averaging (NSA) should not be used and should replaced with high order integration techniques. Further, the effect of different Weibull parameters on the performance as well as a method to artificially increase the precision are shown in this paper. The results can be used to determine the best method for a particular use case scenario.
+
+% "alte Version"
+Evaluating components using \ac{fem} based algorithms is a standard practise and is
+therefore also used for the evaluation of brittle materials. In this work, different 
+methods for implementing the \ac*{pia} method into existing \ac{fem} programs are evaluated. Their advantages and disadvantages, mainly the computational error and effort, are analyzed and compared by numerical simulations. 
+In particular, it shows that the commonly used \ac*{nsa} approach should not be used and should replaced with high order integration techniques.
+Further, the effect of different Weibull parameters on the performance as well as a method to artificially increase the precision are shown in this paper. The results can be used to determine the best method for a particular use case scenario.
+% Please include a maximum of seven keywords
+\keywords{brittle, failure, FEM, isoparametric, PIA, strength, Weibull theory}
+\end{abstract}
+\end{frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{src/soa.tex}
+\input{src/method.tex}
+\input{src/result.tex}
+\input{src/discussion.tex}
+\input{src/conclusion.tex}
+\input{opt/los.tex}
+
+%\section*{acknowledgements}
+%Acknowledgements should include contributions from anyone who does not meet the criteria for authorship (for example, to recognize contributions from people who provided technical help, collation of data, writing assistance, acquisition of funding, or a department chairperson who provided general support), as well as any funding or other support information.
+%\printendnotes%???????????????????????????
+% Submissions are not required to reflect the precise reference formatting of the journal (use of italics, bold etc.), however it is important that all key elements of each reference are included.
+\bibliography{sources}
+%\include{appendix}
+\end{document}
