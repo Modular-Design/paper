@@ -1,3 +1,3 @@
 [submodule "sources"]
-	path = ref
+	path = refs
 	url = https://github.com/Modular-Design/sources.git
