@@ -1,6 +1,9 @@
 \documentclass[a4paper]{jpconf}
 \usepackage{graphicx}
 \usepackage{paper_infos}
+\usepackage[ruled]{algorithm2e}
+\SetKwProg{Fn}{Function}{}{end}\SetKwFunction{FBSort}{BubbleSort}%
+\SetAlgoLongEnd
 \usepackage[sorting=none, style=numeric]{biblatex}
 
 \addbibresource{sources/sources.bib}
@@ -24,9 +27,5 @@ Dresden Center for Intelligent Materials, Germany} and R Böhm$^{1}$}
 \input{src/result.tex}
 \input{src/discussion.tex}
 
- 
 \printbibliography
-
 \end{document}
-
-
