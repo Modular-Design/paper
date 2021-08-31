@@ -1,0 +1,32 @@
+\documentclass[a4paper]{jpconf}
+\usepackage{graphicx}
+\usepackage{paper_infos}
+\usepackage[sorting=none, style=numeric]{biblatex}
+
+\addbibresource{sources/sources.bib}
+\addbibresource{sources/software.bib}
+\addbibresource{sources/optimization.bib}
+
+\begin{document}
+\title{\ptitle}
+
+\author{W Zschiebsch$^1$,A Filippatos$^2,$\footnote[3]{Present address:
+Dresden Center for Intelligent Materials, Germany} and R Böhm$^{1}$}
+
+\address{$^1$ Leipzig University of Applied Sciences, Faculty of Engineering, Germany}
+\address{$^2$ Dresden University of Technology, Institute of Lightweight Engineering and Polymer Technology, Germany}
+
+\ead{willi.zschiebsch@htwk-leipzig.de}
+
+\input{src/abstract.tex}
+\input{src/introduction.tex}
+\input{src/method.tex}
+\input{src/result.tex}
+\input{src/discussion.tex}
+
+ 
+\printbibliography
+
+\end{document}
+
+
