@@ -2,12 +2,17 @@
 From the beginning of the design process when each component, 
 like part specific functions are briefly defined, the system interactions 
 are described as a directed graph.
-During further refinements in the design process, 
-these components are changed by using methods like be 
-subdivision, summariz or outsources.
+This allows to do further refinements during the design process, 
+by declaring sub-functions, outsource or summarize functionality together.
+Tis can be 
+Therefore
 The individual components therefore have to implement a certain interface, 
-which allows to set the inputs and updates the outputs accordingly.
-
+which allows to set the inputs and update the outputs accordingly.
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{pics/VDI_2206.PNG}
+    \caption{\label{pic:VDI2206} "General approach for development and construction (VDI 2221)." \cite{Jansch2006THEDO}}
+\end{figure}\\
 Using a directed graph method to represent each process Each step in a workflow can be represented as blackbox with a certain input and output (fig. \ref{pic:process-single}).
 Due to simplicity the inputs and outputs have values that consists of a list of numbers. 
 This values may be connected to other steps in the workflow resulting in different dependencies.
@@ -27,18 +32,18 @@ test
             \eIf{A.Time == B.Time}{
                 \eIf{A.InputConnections-A.InputChanges == B.InputConnections-B.InputChanges}{
                     \eIf{A.InputChanges == B.InputChanges}{
-                        \Return{A.OutputConnections < B.OutputConnections}
+                        \Return{A.OutputConnections $<$ B.OutputConnections}
                     }{
-                        \Return{A.InputChanges > B.InputChanges}
+                        \Return{A.InputChanges $>$ B.InputChanges}
                     }
                 }{
-                    \Return{A.InputConnections-A.InputChanges < B.InputConnections-B.InputChanges}
+                    \Return{A.InputConnections-A.InputChanges $<$ B.InputConnections-B.InputChanges}
                 }
             }{
-                \Return{A.Time < B.Time}
+                \Return{A.Time $<$ B.Time}
             }
         }{
-            \Return{A.InputConnections < B.InputConnections}
+            \Return{A.InputConnections $<$ B.InputConnections}
         }
     }
     \textbf{end}
