@@ -1,3 +1,22 @@
 \section{Conclusion}
 
-asdas
+Lightweight design requires highly optimized components.
+These components therefore often need to go through a large amount of optimization cycles that are expensive and time consuming.
+In this thesis it was shown that certain tasks during the development process could be automated.
+Especially, the interaction between analytical verification and the designs, which shows great potential for improvements, was highlighted.
+In order to automate these steps, the idea of a software tool was introduced that can solve a given network of different processes.
+Therefore, systems and solutions from disciplines such as graph theory and model representation in simulations were adapted to illustrate the development process.
+In thesis, a solving algorithm was introduced with which the connected sub-process can be processed, taking into account the interaction between the processes.
+Further, the software was implemented to proven that such system also enables parameter studies and find optimal constellations for design problems with multiple domains.\\
+In order to enable a broad use of the developed tool, the architecture was designed as modular as possible.
+This meant that every simulation program, CAD-tool and digital process could be integrated into the design process.
+Additionally, this approach also enables the software to easily be implemented in existing workflows, as existing models, files, etc. can be reused outside the developed software.
+Further, the software uses a server-client network architecture to enable the specialists to collaborate on problems with with multiple domains and to outsource time-consuming operations to specialized servers.
+Two examples demonstrate the capabilities for solving complex multi-domain problems and for finding optimal solutions.\\
+The successful test shows a great work relief and time savings.
+However, the developed tool has certain limitations and requires the ability to design products that some engineers are unfamiliar with.
+For example, it is difficult, if not impossible, to implement manufacturing processes and experimental verification into the automatic design approach.
+Additionally, engineers need to be able to express the value of a product, not necessary in relation to cost, as a mathematical formula so that the program can determine which solution is better.\\
+Given the enormous potential of software driven solutions such as the tool developed, it is very likely that these kind of tools will become an essential part of every engineer's work routine.
+However, improvements still made to be in terms of useability, performance, security, stability, and plugin support.\\
+The software can be downloaded at \cite{git_mdd, git_client}.
