@@ -21,44 +21,7 @@ Therefore further approximations are introduced:
     \item a solver run is done if every node is updated at least once
 \end{enumerate}
 
-\begin{algorithm}[bt]
-    \KwIn{List of Processes\\
-    Priority $\in$ ["manual", "dynamic", "time"]}
-    \KwOut{Updated and converged processes}
-    sort(List of Processes)\;
-    \textbf{set} GState to "changed"\;
-    \textbf{set} StartPos to 0\;
-    \While{GState = "changed"}{
-        \textbf{set} GState to "unchanged"\;
-        \For{i = StartPos to sizeof(List of Processes)}{
-            \textbf{set} CurrProcess as ith Element of List of Processes
-            \textbf{set} GState to "unchanged"\;
-            \textbf{set} STime to currentTime()\;
-            \textbf{set} PState to CurrProcess.update()\;
-            \textbf{set} ETime to currentTime()\;
-            \textbf{set} $\Delta$Time to ETime - STime\;
-            \If{Priority equals "time"}{
-                CurrProcess.Time = round($\log_{10}${$\Delta$Time})\;
-            }
-            \If{PState equals "changed"}{
-                \textbf{set} GState to "changed"\;
-            }
-            \If{CurrProcess.Inputs equals 0 \emph{\textbf{and}} Priority not "manuel"}{
-                \textbf{set} StartPos to i\;
-            }
-            \If{Priority equals "dynamic" \emph{\textbf{or}} Priority equals "time"}{
-                \textbf{set} List of FProcesses as List of Processes starting from CurrProcess\;
-                \ForEach{FurtherProcess in  List of FProcesses}{
-                    FurtherProcess.InputChanges.update()\;
-                }
-                sort(List of FProcesses)\;
-            }
-            increase i by one\;
-       }
-    }
-\caption{\label{code:update-standard-processor}Update-Algorithm for complex systems}
-\end{algorithm}
-With this simplifications it is possible to uses the heuristic approach (algorithm \ref{code:update-standard-processor}) to approximate the solution.
+With this simplifications it is possible to uses the heuristic approach to approximate the solution.
 However this approach requires a intelligent ranking of the nodes.
 Therefor the following rules are introduced:
 \begin{enumerate}
@@ -67,39 +30,9 @@ Therefor the following rules are introduced:
     \item nodes where a majority of all inputs have already changed have priority
     \item nodes with fewer connections have lesser dependencies and therefor have priority
 \end{enumerate}
-The rule based sorting algorithm \ref{code:sort-process} is therefor constantly used during the updating process.
-\begin{algorithm}[ht]
-    \SetAlgoLined
-    \KwIn{list of porcesses}
-    \KwOut{sortet list of processes}
-    use bubble sort to sort the list\; 
-    \Fn{\FBSort{Process A, Process B}}{
-        \eIf{A.InputConnections == B.InputConnections}{
-            \eIf{A.Time == B.Time}{
-                \eIf{A.InputConnections-A.InputChanges == B.InputConnections-B.InputChanges}{
-                    \eIf{A.InputChanges == B.InputChanges}{
-                        \Return{A.OutputConnections $<$ B.OutputConnections}
-                    }{
-                        \Return{A.InputChanges $>$ B.InputChanges}
-                    }
-                }{
-                    \Return{A.InputConnections-A.InputChanges $<$ B.InputConnections-B.InputChanges}
-                }
-            }{
-                \Return{A.Time $<$ B.Time}
-            }
-        }{
-            \Return{A.InputConnections $<$ B.InputConnections}
-        }
-    }
-    \textbf{end}
-\caption{\label{code:sort-process}Sort-Algorithm}
-\end{algorithm}
-The sorting of the second algorithm can be 
-test
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.5]{pics/evol_alg.PNG}
-    \caption{\label{pic:evol_alg} "General approach for development and construction (VDI 2221)." \cite{Jansch2006THEDO}}
-\end{figure}\\
-test
+This rule based approach enables a fast deterministic updating process.\\
+After solving all system dependencies multiple different permutations of the system inputs can be used to find a optimal system environment.
+population based approaches as swarm and evolutionary based optimization methods are therefor recommended.
+The fitness function is constructed from selected system properties.
+To reduce the amount of recomputation the proposed system stores all generated systems as database.
+The system is therfore capable of reusing the already computed variants and only computes missing systems.
