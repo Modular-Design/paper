@@ -1,7 +1,7 @@
 \section{Results}
 
 The first capability of the introduced system to proof is 
-to solve complex interactions and iterations loops.
+to solve complex interactions and iterations loops that are of a non-linear kind.
 Therefor a material hoists is chosen, 
 due to the fact that the motor weight adds 
 to the overall weight of the lift (fig. \ref{pic:lift_model}), 
@@ -12,13 +12,13 @@ This over estimation garants a safty tolerance.
 In cases where mass reduction is crutial like in aircraft and space applications, this is often not an option.
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.55\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pics/500Z_model.png}
         \caption{\label{pic:lift_model} Model of a material lift.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
+    \begin{subfigure}[b]{0.95\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pics/500Z_solution.png}
         \caption{\label{pic:lift_solu} Implementation of the design process.}
@@ -30,28 +30,35 @@ Therefor the simplified model is broken into several process, each describing th
 The motor process in figure \ref{pic:lift} represents the selection process of a new motor, based on the minimum torque, RPM, power or maximum mass.
 Realistically, determining the motor properties would be done by searching in a database, but open motor databases have many restrictions.
 Therefor this program calculates a motor based on a simple motor model.\\
-In the CAD-Base process a simplified CAD model (fig. \ref{pic:lift}) of the hoist base is changed and file is generated, which is than transfered to the simulation process.\\
-with a small tolerance the system needed 5 iteration (each iteration needs about 1 min to fully compute) to find the solution.\\
-Trying to determine the solution with traditional methods lead to 15 min per iteration, where adapting the simulation to the new geometrie was taking the longest time.
+The base of the hosit is represented by two systems:
+The CAD-Base cahnges a simplified CAD model (fig. \ref{pic:lift}).
+The generated file is then  transfered to the simulation process.
+There the inserted loads are applied to the model and the relevant stresses are outputed.\\
+Against the usual material hosits with a high tolerance for failure,
+the system is with safety factor of 1.2 more on the lightweight spectrum.
+The developed system needed, depending on the intitial configuration, up to 12 iteration (each iteration needs about 1 min to fully compute on a normal laptop) to find the solution.
+Designing a system with a eigenweight problem and a small safety nomaly takes a long time.
+Hence it is difficult to find suitable refernce data, the follwing assumtion can be made.
+By assuming that each step takes 30 min per iterations, solving the same problem by hand would take up to 6h instead of 12 min by the program.\\
 But the seen time savings have to be taken with care.
-The automated proces uses data interfaces to reuse the CAD-model in the simulation process.
+In the proposed problem it is assumed that both, manual and automated solutions uses the same infrastructure of pre-build simulations, constructions, etc. that are not taking into the overal time.
+Further, the automated process uses data interfaces to reuse the CAD-model in the simulation process.
 Other usecases might require costom conversion and representations interfaces, hence increasing the setup time of such a system.\\
 The material lift is not suited to show a complex optimization problem.
-Thats why is a further use cases is introduced, 
+Thats why a further use cases is introduced, 
 in which an optimal layer composition of a 
-high-speed glass fiber composite(GFC)-rotor has to be determined.
-\cite{filippatos_damage_2017} showed,
-that high-speed composite rotors undergo inhomogeneous and variable stress states induced
+high-speed glass fiber composite(GFC)-rotor has to be determined (fig. \ref{pic:rotor_model}).
+High-speed composite rotors undergo inhomogeneous and variable stress states induced
 by centrifugal forces, which are mainly characterised by multi-axial tension and shear
-loads.
+loads, \cite{filippatos_damage_2017}.
 The observed damage behavior is closely joint with the composition of the fibre-matrix, 
 what increases the structural complexity.
 Furthermore, compression loads can be caused by impact loads leading to inter-fibre failure and delaminations.
 The dynamic response of rotors is further affected by the apparent stiffening from
 the applied centrifugal forces. 
 Consequently, the analysis and description of the damage
-and dynamic behavior usually requires complex approaches for high-speed composite
-rotors than for stationary structures.\cite{filippatos_damage_2017}\\
+and dynamic behavior usually requires more complex approaches for high-speed composite
+rotors than for similar stationary structures \cite{filippatos_damage_2017}.\\
 The interaction of load induced structural and damage behavior, lead to many opportunities for different optimization approaches. 
 This example is designed to show and validate the optimization of to properties which negate each other.
 Therefore, the rotor will be designed to sustain a certain angular velocity, while not starting to vibrate to the rotor oscillation.
@@ -62,13 +69,13 @@ which can be oriented in radial or tangent direction.
 Further, it is assumed that the material will instantly break if the first principle stress reach a the point of rupture.
 \begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.95\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pics/rotor_model.png}
         \caption{\label{pic:rotor_model} Model of a material lift.}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[b]{0.5\textwidth}
+    \begin{subfigure}[b]{0.95\textwidth}
         \centering
         \includegraphics[width=\textwidth]{pics/rotor_solution.png}
         \caption{\label{pic:rotor_solution} Implementation of the design process.}
@@ -79,7 +86,7 @@ Simulating the development process in the developed software is done by
 modelling the material and the rest of the rotor separately, as shown in figure \ref{pic:rotor_solution}.
 This modular approach enables to quickly change the material properties and to reuse the material database.
 it further allows to switch easily between different materials and combinations.\\
-The generated solutions are grooped into groups:
+The generated solutions are grouped as follwing:
 \begin{enumerate}
     \item suitable solutions (principle stress below rupture stress)
     \item unsuitable solutions (principle stress over rupture stress)
@@ -90,6 +97,28 @@ A fitness value is then computed based on a function which represents the follow
     \item the amount of the principle stress below the rupture stress does not matter
     \item a larger distance of the eigenfrequency to the frequency of the engine is better
 \end{enumerate}
+This was implemented by the following domain-specific fitness-functions.
+For the stress evaulation the fitness function is:
+\begin{equation}
+    \label{eq:fitness_stress}
+    f_{\sigma}(\sigma)=2^{(\sigma-\sigma_{b})}=2^{(\sigma-55\frac{N}{mm^2})}
+\end{equation}
+and with:
+\begin{equation}
+    \label{eq:rotation_frequency}
+    f_{r}=\frac{\omega}{2\pi}=\frac{RPM}{60}
+\end{equation}
+the fitness function, evaluatinng the eigenfrequencies, is:
+\begin{equation}
+    \label{eq:fitness_freq}
+    f_{f}(f)=\frac{5 f^5 \exp{\left(-\left((\frac{f}{f_r}\right)^5 + 1\right)}}{5 f_r^5}
+\end{equation}
+Both domain-specific fitness-functions are then combined in a linear function 
+and then scaled seperatly with the following function:
+\begin{equation}
+    \label{eq:fitness_final}
+    f(\sigma,f)=f_{\sigma}(\sigma)+10f_{f}(f)
+\end{equation}
 Overall the optimizer tested 56 of 62 possible permutations.
 Some variants could have been reduced, by considering that two layer compositions that can be mapped into each other by mirroring one.
 For example the two configurations $[r/r/t/r/r/t]$ and $[t/r/r/t/r/r]$ have the eigenfrequency and maximum stress.

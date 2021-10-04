@@ -1,26 +1,33 @@
 \section{Method}
-In this paper the system used to describe the the interactions in a multi-domain
-environment is a directed graph.
-Therefore form the beginning of the design process when each component, 
-like part specific functions are briefly defined, till to the cleaned up and summarized endproduct,
-each step of the process have to described in the same manner.
-This requires the ability to subdivide, summarize and outsource functionalities. 
-Each function is blackbox with unknown system behavior, but known input and output values.
-Therefor each system needs to implement a certain interface, 
-which allows to control the system behavior with input data and options.
-Additionaly, each step of the workflow needs an update mechanism to update the outputs accordingly.
-The resulting entity with inputs, outputs, options and an update mechanism is further called a 'node'.\\
-A system is build by connecting the output and input values of a two nodes.
-The resulting dependencies can build complex interactions with multiple loops and multiple branches.
-These systems are very similar to modern programming languages which are proven to be Turing-Complete.
-This means, that no algorithm can be developed which can determine if the system will converege to a solution.
-Therefore further approximations are introduced:
+With the directed graph representation have been prooven to be 
+sufficiently representation in several occasions.
+The poposed system will also relay on this methology 
+to represent the interactions in a multi-domain environment.\\
+The information that are exchanged between the two subsystems
+are encoded in a scalable JSON format, which uses the HTTP-standard.\\
+This approach allows to reuse many of the already used concepts to exchanged complex informations over the internet.
+Additionally, it supports the Server-Client-architecture, which supports that multiple experts can work together.
+What is important for realtime information exchange in a multi-domain environment.\\
+Further, the system is designed to be used in every step of a cyclic design approach.
+This starts by inserting the conditions of the requirement list, 
+over the functional abstraction and synthesis to the automatically validation of the developed solution.\\
+This is manly archived by providing the abiltiy to subdivide, summarize and outsource functionalities. 
+Additionally the developed system is build on a black-box approach, making it able solve a wider variety of different problems.
+Therefor each system only needs to implement a minimalistc interface, 
+which allows to control the system behavior with certain, input driven characteristics and returning predefined output values.
+The simplicity of the interface reduces the amount of work, wehn trying to implment costom solutions.
+It fruther enables the user to easily share and implement their solutions like databases and simulation based evaluation nodes.\\
+After representing the workflow, a automated system has to find a suitable solution, by taking the interdependencies into account.
+Therefor each system uses its own update-mechanism to set the inputs of the subsystems.
+Depending on the interactions this could lead that a setting one system will cause the inputs of another system to change.
+So the update-mechanism has to find a stabel configuration.\\
+Due to the issue with Turning-comletness, 
+further rules for the reaching of a stable configuration have to be introduced:
 \begin{enumerate}
     \item the system does not converged, when after n solving runs the outputs values still change
     \item a output value is changed if the value differes from the previous update call
     \item a solver run is done if every node is updated at least once
 \end{enumerate}
-
 With this simplifications it is possible to uses the heuristic approach to approximate the solution.
 However this approach requires a intelligent ranking of the nodes.
 Therefor the following rules are introduced:
@@ -32,7 +39,8 @@ Therefor the following rules are introduced:
 \end{enumerate}
 This rule based approach enables a fast deterministic updating process.\\
 After solving all system dependencies multiple different permutations of the system inputs can be used to find a optimal system environment.
-population based approaches as swarm and evolutionary based optimization methods are therefor recommended.
+Population based approaches as swarm and evolutionary based optimization methods are therefor recommended.
 The fitness function is constructed from selected system properties.
-To reduce the amount of recomputation the proposed system stores all generated systems as database.
+To reduce the amount of recomputation the proposed system stores the properties of all generated systems as database.
 The system is therfore capable of reusing the already computed variants and only computes missing systems.
+This means, that for new designs that are based on the same design procedure and only differs by the used fitness funtion are far faster to find.

@@ -18,72 +18,36 @@ also reduces the amount of reusable components with slightly changes in the prod
     \includegraphics[scale=0.4]{pics/cyclic-design.PNG}
     \caption{\label{pic:interactive-design} "A spiral development approach for complex function‐integrative systems." \cite{Modler2020}}
 \end{figure}\\
-Further, with increasing complexity the number of required experts increases.
-This often can lead to miss-communication between the experts themselves or in translation problems 
-to transfer information form one system to another (CAD-chains).\\
-Using the advantages of digital technologies is since the dawn of computer aided design in the mid-1960s
-a research has been done to solve these issues. 
-Resulting in row of CAD-systems, Simulation programs and product data management systems.
-But especially notable was E. Allen, who showed in 1970, that these kind of systems, 
-can be described as a directed graph, consisting of a set of nodes and directed edges, 
-which are connecting the nodes with each other \cite{allen_control_1970}.
-Each node hereby describes a linear sequence of program instructions, 
-what means that nodes have one entry point (the first instruction executed) and 
-one exit point (the last instruction executed).
-Following along the edges, in a directed graph, results in a series of blocks what is called a path.
-This description allows to also describe closed path or circuit is a paths, 
-where the path ends at the same start block \cite{allen_control_1970}.\\
-Problems that can be described with these models are summarized 
-under the term "directed graph theory" \cite{bang-jensen_digraphs_2009, lehman_directed_2010}
-and have been studied for a wide variety of different applications in 
-\cite{lehman_directed_2010, aho_theory_1972, kam_global_1976}.\\
-Graph based solutions are often characterized as easy to understand and to compute, 
-but also have difficulties if the causality can change dynamically \cite{sinha_modeling_2001}. 
-Further, with systems like CAMP-G and SIDOPS+ \cite{breunese_modeling_1996} mechanism to solve 
-nonlinear high-dimensional graph models that can contain both continuous-time and 
-discrete-time parts have been developed.\\
-Today, Graph-Based Approaches has been implemented in a handful of design programs and 
-simulations tools \cite{noauthor_dynamo_2020, noauthor_function_2020, noauthor_systems_2020},
-but none of these implementations allows the use of processes of other design or simulation tools.\\
-Complex multi-disciplinary systems requires the expertise of a group of collaborating specialists:
-Designers with backgrounds in different disciplines collaborate with analysts, manufacturing engineers, marketing
-specialists, and business managers \cite{sinha_modeling_2001}.\\
-Therefor computer aided engineering (CAE) technologies, that provide sharing, visualization, 
-documentation, and management of product models,
-are used to coordinate design processes among geographically dispersed and multidisciplinary
-teams \cite{finger_creating_1994, bajaj_web_1999, iwasaki_web-based_2002}.
-However, the aspect of collaborative simulation modeling is still in its infancy. 
-The current approach to support collaborative modeling, is done by shared model representations, 
-repositories to manage model components, and model abstraction capabilities to provide different views of models to designers.
-Therefore designers need a common model representation to share simulation models within a collaborative modeling environment.\cite{sinha_modeling_2001}\\
-This approach has been used in the development of the Very High-Speed Integrated Circuit Hardware Description Language,
-which has been used as a design automation tool in all phases of modern very large-scale integration design. 
-Similarly, the U.S. Department of Defense and its contractors have used the High Level Architecture for simulation of
-battlefield scenarios \cite{lutz_high_1998,park_relational_1994}.
-Future modeling and simulation environments should allow for a tight integration
-between application domains, either by interfacing the solvers or by using common model representations.
-To further improve the exchange of model information, researchers have started to develop domain ontologies \cite{devedzic_survey_1999}. 
-later, Ozawa et al. proposed a common ontology to support different levels of information sharing between humans and multiple
-modeling and simulation software agents \cite{ozawa_model_2000}. 
-Upon these domain ontologies, unified taxonomies and keyword networks
-can be built to support model retrieval and repository management.\\
-Methods, which aims to increase the amount of automation potential during the design process
-are introduced in \cite{Herrmann2021, Berschik2021, Altun2021, Russwurm2021}.
-This potential is shown in the figure \ref{pic:VDI2206}.
+Even before the rise of digital twins \cite{Leitenberger2021} solution have been applied to digital represnet each functionality and each dependencies of asystem.
+Starting in 1970, E. Allen layed the fundament of current resarch with his work on directed graphs \cite{allen_control_1970}.
+Today solutions like ANSYS, SiemensNX, CAMUNDA, etc. implement workflow engines to automate processes which are presented as directed graphes \cite{noauthor_dynamo_2020, noauthor_function_2020, noauthor_systems_2020}.
+These engines are build on certain requirements, like automating some of the simulation work and safing time by reusing models.
+But are limited in the kind of systems they can represents.\\
+One reasons is that only linear graphs, with a few exceptions are represented and solved.
+ANSYS for example, bey default only allows linear graphs, with the only excepts, being parameter studies.
+While this is often is enough, its a big issue if interdependencies behave non-linear, like the dependencies in structural batteries, 
+where structural and electrical properties are strongly intertwined \cite{Asp2021}.
+On the other side problems is that general non-linear graph representations have been proofen to be Turing-complete.
+Therefore it is impossible to find an algorithm that finds a converged solution to all systems \cite{Ajtai1990}.\\
+Further the use is often limited on to a certain system or software ecosystem.
+This is mostly, due to a lack of standardization in model representations.
+But there is one exception: for the planning, designing, construction and mantaining of builds the 
+"Building information modeling" (BIM) has been developed since the 1970s and is an international agreed standard with the ISO 19650 since 2019.
+While standards for the problem of designing problems a international standard is still missing, some notable efforts have been made \cite{noauthor_modelica_nodate, mukherjee_hierarchical_1999,  Berschik2021}.
+With system implementing its own standards, the number of different data formats increases.
+Further increasing the complexity of modelling multi-disciplinary systems.
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.6]{pics/VDI_2206.PNG}
     \caption{\label{pic:VDI2206} Automatisation potential in the VDI 2206 Guidline \cite{Jansch2006THEDO}.}
 \end{figure}\\
-If a complex multi-disciplinary systems can be modelled sufficiently, the question of the optimal solution rises.
-A big issue that the system behavior, id hard to predict.
-Therefore only optimizations approaches will be discussed, which can deal with systems,
-where the system can be considered as a black box, excluding approaches like Gradient descent method.
-Further it is important to make sure to find the global optimum and not to fall in local minima.
-Therefor suitable approaches are: simulated annealing \cite{khachaturyan_thermodynamic_1981}, 
-evolutionary algorithm \cite{wu_ensemble_2019}, particle swarm optimization \cite{Kennedy1995} and Bayesian optimization \cite{marcuk_optimization_1975}.\\
-In \cite{hornby_automated_2006, khalafallah_electimize_2011, evans_aerodynamic_2017, slagter_perform_2020}
-single domain based simulations have been combined with optimization methods.\\
-However, the question remains, if a system can be designed to sufficiently describe the  
-the causalities of a complex multi-disciplinary systems and if so, 
-could it be used to optimize a complex product.
+Another issue which can arise in design processes is the amount of optimization work, which takes a major part of the development time in high effient products.
+Optimizations therefor stretches, from topologie optimization, to varaints comparision and parameter tuning \cite{hornby_automated_2006, khalafallah_electimize_2011, evans_aerodynamic_2017, slagter_perform_2020}. 
+This lead to an extra major potential for time saving in lightweight design, as shown in figure \ref{pic:VDI2206}.\\
+Assuming that the complex multi-disciplinary systems can be modelled sufficiently, the question of how to find the optimal solution rises.
+Therfore algorithm has been developed, which requires up to none system knowledge.
+Algorithm like simulated annealing \cite{khachaturyan_thermodynamic_1981}, 
+evolutionary algorithm \cite{wu_ensemble_2019}, particle swarm optimization \cite{Kennedy1995} and Bayesian optimization \cite{marcuk_optimization_1975}
+are the most popular ones, by have proofen to find find the global optimum and not to fall in local minima.\\
+Following the state of the art, this paper wants to introduce it an open-source information based workflow engine for design processes.
+The proposed work will therfore fokus on the representation of complex multi-domain tasks and implements optimization techniques to find the best product for a custom use case.
