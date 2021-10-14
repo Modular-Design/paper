@@ -1,22 +1,15 @@
 \section{Conclusion}
-
-Lightweight design requires highly optimized components.
-These components therefore often need to go through a large amount of optimization cycles that are expensive and time consuming.
-Therefor a proof of concept was introduced, which implements state of the art algorithm to increase to maximize the automation during the development process.
-Further, the POC uses a scalable API system to enable information flow across development domains and 
-In order to automate these steps, a software tool was introduced that can solve a given information based network of different processes.
-Therefore, systems and solutions from disciplines such as graph theory and model representation in simulations were adapted to illustrate the development process.
-In this work, a solving algorithm was introduced with which the connected sub-process can be processed, taking into account the interaction between the processes.
-Further, the software was implemented to prove the predicted improvements in a high optimized, multi-domain environment.\\
-In order to enable a broad use of the developed tool, the architecture was designed as modular as possible.
-This meant that every simulation program, CAD-tool and digital process could be integrated into the design process.
-Additionally, this approach also enables the software to easily be implemented in existing workflows, as existing models, files, etc. can be reused outside the developed software.
-Further, the software uses a server-client network architecture to enable the specialists to collaborate on problems with with multiple domains and to outsource time-consuming operations to specialized servers.
-Two examples demonstrate the capabilities for solving complex multi-domain problems and for finding optimal solutions.\\
-The successful test shows a great work relief and time savings.
-However, the developed tool has certain limitations and requires the ability to design products that some engineers are unfamiliar with.
-For example, it is difficult, if not impossible, to implement manufacturing processes and experimental verification into the automatic design approach.
-Additionally, engineers need to be able to express the value of a product, not necessary in relation to cost, as a mathematical formula so that the program can determine which solution is better.\\
-Given the enormous potential of software driven solutions such as the tool developed, it is very likely that these kind of tools will become an essential part of every engineer's work routine.
-However, improvements still made to be in terms of useability, performance, security, stability, and plugin support.\\
-\input{src/acknowledgement.tex}
+Designing multifunctional and lightweight products is time consuming work, due to a high number of functional dependencies that have to be taken into account.
+In this article a digital methodology is introduced, 
+which aims to reduce the development time and 
+increases the overall product quality by enabling multi domain optimizations.
+The introduced system used the advantages of a complete digitizes, graph-based process representation.
+It enables specialists to collaborate on problems with multiple domains and allows to outsource time-consuming operations to specialized servers.\\
+With an heuristic approach the software tries to compute a stable configuration of the modeled interactions.
+In the first example, this capability was used to solve the complex interactions of design problem which has to take the eigenweight into account.
+It showed how different design process could be linked together, without introducing a new file format.\\
+Additionally, given a ranking of multiple solution is described by a fitness function, the developed software can find the global optimum.
+This was proven with the second example, where the system found the optimal layer constellation of an high-speed glass fiber reinforced plastics rotor.
+It further demonstrated how multiple optimization goals can be taken into account.\\
+While the test showed room for improvements in terms of performance, stability and user friendliness,
+they also shows a major potential for great work relief and time savings.

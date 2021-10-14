@@ -1,11 +1,11 @@
 \section{Method}
 The development of a methodology that supports the complex interactions of multifunctional designs can structured in:
-\begin{itemize}
+\begin{enumerate}
     \item model representation,
     \item system interfaces,
     \item solution strategy,
     \item additional capabilities.
-\end{itemize}
+\end{enumerate}
 As a sufficient and intuitive model representation the directed graph representation has been used for similar purposes.
 Thats why the proposed system will also relay on this methodology 
 to represent the interactions in a multi-domain environment.\\
@@ -30,20 +30,20 @@ A major issue, which arises from the complex interactions, is that by solving on
 This means, that a solution is found, when a stable configuration, where no further changes are introduced, is reached.\\
 Because finding a general solution is proven to be Turning-complete and therefore impossible to find deterministically, 
 a set of rules to simplify this process are introduced:
-\begin{itemize}
+\begin{enumerate}
     \item the system has not converged, when after n solving runs the outputs values still change,
     \item an output value is changed if the value differs from the previous update call,
     \item a solver run is done if every node is updated at least once.
-\end{itemize}
+\end{enumerate}
 With this simplifications it is possible to uses the heuristic approach to approximate the solution.
 However, this approach requires an intelligent ranking of the nodes.
 For that purpose the following rules are introduced:
-\begin{itemize}
+\begin{enumerate}
     \item nodes with no connected inputs are starting points and should always be at the beginning of an update progress,
     \item nodes which need more time to compute should update as rarely as possible,
     \item nodes where a majority of all inputs have already changed have priority,
     \item nodes with fewer connections have less dependencies and therefor have priority.
-\end{itemize}
+\end{enumerate}
 This rule-based approach enables a fast deterministic updating process.\\
 After solving all system dependencies, multiple different permutations of the system inputs can be used to find an optimal system environment.
 Population based approaches as swarm and evolutionary based optimization methods are for that purpose recommended.
